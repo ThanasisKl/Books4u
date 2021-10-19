@@ -1,0 +1,74 @@
+GET http://localhost:3000/users
+
+###
+POST http://localhost:3000/users 
+Content-Type: application/json
+
+{
+    "name":"than",
+    "surname":"klet",
+    "email":"thanasis@gmail.com",
+    "password":"1234567",
+    "books":[
+        {
+            "title_auth": "testlooololooo",
+            "id": 1,
+            "comments": "Nice Book"
+        },
+        {
+            "title_auth": "test2",
+            "id": 2,
+            "comments": "Nice Ending"
+        },
+        {
+            "title_auth": "test3",
+            "id": 3,
+            "comments": "lol"
+        }
+        ]
+    }
+
+###
+
+POST http://localhost:3000/home 
+Content-Type: application/json
+
+{
+"email": "thanasis@gmail.com", "password": "1234567"
+}
+
+
+###
+POST http://localhost:3000/home/saveBook/thanasis@gmail.com
+Content-Type: application/json
+
+{
+    "title_auth": "test_auth",
+    "id": "223232323321",
+    "comments" : "test"
+}
+
+###
+DELETE http://localhost:3000/home/deleteBook/thanasis@gmail.com
+Content-Type: application/json
+
+{
+    "title_auth": "test_auth",
+    "id": "223232323321",
+    "comments" : "test"
+}
+
+
+###
+GET http://localhost:3000/home/booksList/saved_books/thanasis@gmail.com
+Content-Type: application/json
+
+###
+PUT http://localhost:3000/home/booksList/bookProcess/proccess/thanasis@gmail.com
+Content-Type: application/json
+
+{
+    "title_auth": "put",
+    "id": "223232323321",
+    "comments" : "testtesttest"
+}

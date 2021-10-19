@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Books</title>
+    <script src = "https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+    <script id="text-template" type="text/x-handlebars-template"> <!--handlebars-->
+        <ul id=search_list>
+            {{#each fav_books}}
+                <div id={{id}}div>
+                    <li id={{id}}_ class="arrow">{{title_auth}} ({{id}})</li>
+                    <button id={{id}} class="delete">Delete</button>
+                    <a href="/home/booksList/bookProcess" id={{id}}a class="process">Process</a>
+                    <a href="https://www.google.com/search?q={{title_auth}}" class="info" target="_blank">More Info</a>
+                    <p id={{id}}r>{{comments}}</p>
+                </div>
+            {{/each}}
+        </ul>
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src = "../js/booksManagment.js"></script>
+</head>
+<body>
+    <div class="container">
+    <header>
+        <!-- <h1 id="name">
+            <div id="icon">
+                <i class="fas fa-book"></i>Books4u
+            </div>
+        </h1> -->
+        <div class="float-container">
+            <div class="float-child">
+                <h1 id="name">
+                    <div id="icon">
+                        <i class="fas fa-book"></i>Books4u
+                    </div>
+                </h1>
+            </div>
+            <!-- <div class="float-child">
+                <div>
+                    <a href="/">
+                        <i class="fas fa-sign-out-alt" id="logout"></i>
+                    </a>
+                </div>
+            </div> -->
+        </div>
+        
+        <a href="../home" id ="list">Search Book</a>
+    </header>
+    <main>
+        <h2 class="results" id="Fbooks">My Favourite Books</h2>
+        <label for="filter" id="search_lbl">Filter Saved Books</label>
+        <div>
+            <input type="text" id="filter"  placeholder="Search Here">
+        </div>
+        
+        <section>      
+            <div id="search_results"></div>
+        </section>
+    </main>
+    <footer>
+        <p>Copyright &#169; 2021 Search Machine - All rights reserved</p>
+    </footer>
+    </div>
+</body>
+</html>

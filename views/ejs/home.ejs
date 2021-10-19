@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Machine</title>
+    <script src = "https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+    <script id="text-template" type="text/x-handlebars-template">  <!--handlebars-->
+        <ul id=search_list>
+            <h2 class="results">Search Results</h2>
+            {{#each work}}
+            <li id={{workid}}_ class="arrow">{{titleAuth}}</li>
+            <button id={{workid}} class="save">save</button>
+            <div class="del" id={{workid}}d>
+            </div>
+            <p id={{workid}}p></p>
+            {{/each}}
+        </ul>
+    </script>
+
+    <script id="text-template2" type="text/x-handlebars-template">  <!--handlebars-->
+        <ul id=search_list>
+            <h2 class="results">Search Results</h2>
+            {{#each results_list}}
+            <li id={{id}}_ class="arrow">{{search}}</li>
+            <button id={{id}} class="save">save</button>
+            <div class="del" id={{id}}d>
+            </div>
+            <p id={{id}}p></p>
+            {{/each}}
+        </ul>
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src = "js/main.js"></script>
+    <!-- <script src = "js/disconnection.js"></script> -->
+</head>
+<body>
+    <div class="container">
+    <header>
+        <!-- <h1>Search Books</h1> -->
+        <div class="float-container">
+            <div class="float-child">
+                <h1 id="name">
+                    <div id="icon">
+                        <i class="fas fa-book"></i>Books4u
+                    </div>
+                </h1>
+            </div>
+            <div class="float-child">
+                <div>
+                    <a href="/">
+                        <i class="fas fa-sign-out-alt" id="logout"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <a href="/home/booksList" id ="list">Books List</a>
+    </header>
+
+    <main>
+        <% if (locals.name !=="") { %>
+            <h3 id="welcome">Welcome back <%= locals.name || '' %></h3>
+          <% } %>
+        <p id="email"><%= locals.email || '' %></p>
+        <h2>Search Machine based on Penguin Random House API</h2>
+        <label for="search" class="labelF">Search For Books:</label>
+        <div>
+        <input type="text" id="search" name="search" placeholder="Search Here" autocomplete="on">
+        </div>
+        <label for="search2" class="labelF">Search For Authors:</label>
+        <div>
+        <input type="text" id="search2" name="search2" placeholder="Search Here" autocomplete="on">
+        </div>
+        <button id="button">Search</button>
+        <div id = "div"></div>
+        <section>      
+            <div id="search_results"></div>
+        </section>
+    </main>
+    <footer>
+        <p>Copyright &#169; 2021 Search Machine - All rights reserved</p>
+    </footer>
+    </div>
+</body>
+</html>
