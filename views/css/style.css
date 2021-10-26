@@ -264,9 +264,43 @@ li.arrow::before {
 
 #welcome{
     text-align: center;
-    color:rgb(4, 4, 155);
+    color:rgb(155, 4, 42);
+    font-weight: 900;
+    font-family: cursive;
 }
 
 div .float-container{
     margin-top:20px;
+}
+
+@media only screen and (max-width:580px){
+
+    #list{
+        font-size:1.1em;
+        padding: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        float:none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+        text-align: center;
+        border-top: solid 2px whitesmoke;
+        border-bottom: solid 2px whitesmoke;
+        border-left-style:none;
+        border-right-style:none;
+        background-color: #1c8ff3;
+        color:whitesmoke;
+    }
+
+    #icon{
+        font-size: 1em;
+    }
+
+    main{
+        grid-column: 1/4;
+        margin:0px;
+
+    }
 }
