@@ -8,6 +8,7 @@ window.onload = function(){
     
 
     document.getElementById("button").addEventListener("click", function(){
+        document.getElementById("button").innerHTML =` <i class="fa fa-spinner fa-spin"></i>`;
         let keyword = document.getElementById("search").value;
         if(keyword.trim()!==""){      //search for a book
             let url ="https://reststop.randomhouse.com/resources/works?search="+keyword
@@ -81,6 +82,7 @@ window.onload = function(){
                 })
             }else{
                 console.log("Empty Fields");  //searching without input
+                document.getElementById("button").innerHTML = `Search`
             }
         }
     });
@@ -114,6 +116,7 @@ function findWorkIds(data){ //stores all workids from authors
 }
 
 function createListeners2Buttons(){ //creates event listeners to every save buttons
+    document.getElementById("button").innerHTML = `Search`
     let elements = document.getElementsByClassName("save");
     for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener('click',function(){

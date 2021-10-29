@@ -112,6 +112,12 @@ h1{
   }
 }
 
+p{
+  text-decoration: none;
+  color:rgb(255, 144, 144);
+  text-align: center;
+}
+
 #register{
   color:aliceblue;
   display: block;
