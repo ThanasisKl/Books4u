@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" type="text/css" href="../css/style.css"> -->
     <link rel="stylesheet" type="text/css" href="css/login_style.css">
     <script src = "js/login.js"></script>
+    <script src = "js/showPassword.js"></script>
 </head>
 <body>
 
@@ -20,14 +20,6 @@
         <h1 id="login">Login</h1>
         <main>
             <form action="/home" method="POST">
-                <!-- <div>
-                    <label for="email">Email</label><br>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div>
-                    <label for="password">Password</label><br>
-                    <input type="password" id="password" name="password" required>
-                </div> -->
                 <div class="textbox">
                     <i class="fas fa-envelope"></i>
                     <input type="email" placeholder="Email" id="email" name="email" required>
@@ -36,11 +28,12 @@
                   <div class="textbox">
                     <i class="fas fa-lock"></i>
                     <input type="password" placeholder="Password" id="password" name="password" required>
+                    <i class="fas fa-eye" id="eye"></i>
                   </div>
                 <button type="submit" class="btn" id="login_button">Login</button>
             </form>
             <div>
-                <p><%= locals.message || '' %><p>
+                <p id="message"><%= locals.message || '' %><p>
             </div>
             <a href="/register" id="register">Create an account</a>
         </main>

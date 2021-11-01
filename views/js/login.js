@@ -9,4 +9,8 @@ window.onload = function(){
             document.getElementById("login_button").innerHTML = 'Login' ;
         },2500)
     })
+
+    if(document.getElementById("message").innerHTML === "Incorrect Email or password"){
+        document.getElementById("message").innerHTML = ` <i class="fas fa-exclamation-triangle"</i> Incorrect Email or password`;
+    }
 }
