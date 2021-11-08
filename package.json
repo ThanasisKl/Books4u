@@ -16,7 +16,8 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "json": "^11.0.0",
-    "mongoose": "^6.0.9"
+    "mongoose": "^6.0.9",
+    "nodemailer": "^6.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"

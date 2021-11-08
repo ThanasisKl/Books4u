@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const User = require('./models/user');
 const mongoose = require('mongoose');
 const path = require('path');
-// const bodyParser = require('body-parser');
+var nodemailer = require('nodemailer');
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -43,7 +43,6 @@ app.get('/home/booksList/bookProcess',function(req,res){
 });
 
 app.get('/users', (req, res) => {
-  // res.json(users)
   console.log("GET request get all users");
   User.find({})
   .then(saved_books => {
@@ -71,6 +70,7 @@ app.post('/users', async (req, res) => {
     .then(user => {
         if (user==""){
             User.insertMany(newUser);
+            sendEmail(newUser.email,newUser.name);
             res.render("ejs/login.ejs",{message:"Login to the account that you just created"});
         }else{
             res.status(400).json({
@@ -90,19 +90,6 @@ app.post('/users', async (req, res) => {
 })
 
 app.post('/home', async (req, res)=> {
-  // const user = users.find(user => user.name === req.body.name)
-  // if (user == null) {
-  //   return res.status(400).send('Cannot find user')
-  // }
-  // try {
-  //   if(await bcrypt.compare(req.body.password, user.password)) {
-  //     res.send('Success')
-  //   } else {
-  //     res.send('Not Allowed')
-  //   }
-  // } catch {
-  //   res.status(500).send()
-  // }
   User.findOne({email: { $eq: req.body.email }})
   .then(user => {
     if (user==null){
@@ -113,29 +100,13 @@ app.post('/home', async (req, res)=> {
     }
     
     try {
-    //   console.log("User: "+user);
-    //   // flag = await comparePasswords(req.body.password, user.password);
-    //   if(await bcrypt.compare(req.body.password, user.password)) {
-    //     res.send('Success')
-    //   } else {
-    //     res.send('Not Allowed')
-    //   }
-    // }catch {
-    //   res.status(500).send()
-    // }
     console.log(req.body.password+"----"+user.toObject().password)
     bcrypt.compare(req.body.password, user.toObject().password)
     .then(result=>{
       console.log(result);
       if(result){
-        // return res.status(200).json({
-        //   msg: "Login Success"
-        //   });
         res.render("ejs/home.ejs",{name:user.toObject().name, email:user.toObject().email});
       }else{
-        // return res.status(400).json({
-        //   msg: "Fail password"
-        //   });
         res.render("ejs/login.ejs",{message:"Incorrect Email or password"});
       }
     })
@@ -250,6 +221,32 @@ app.put('/home/booksList/bookProcess/proccess/:email',(req,res)=>{
   })
 })
 
+function sendEmail(email,name){
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'books4ubot@gmail.com',
+      pass: 'hjhbfgxdrqdyisuw'
+    }
+  });
+  
+  var mailOptions = {
+    from: 'books4ubot@gmail.com',
+    to: email,
+    subject: 'Registration Complete',
+    text: `Welcome to Books4u ${name}!`
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
+}
+
 app.use(express.static(path.join(__dirname,'views')));
-// app.use("/static", express.static('./static/'));
+
 app.listen(3000,() => console.log('listening at port 3000'));
