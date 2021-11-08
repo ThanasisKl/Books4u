@@ -42,8 +42,8 @@ app.get('/home/booksList/bookProcess',function(req,res){
   res.render("ejs/bookProcess.ejs"); 
 });
 
-app.get('/users', (req, res) => {
-  console.log("GET request get all users");
+app.get('/users', (req, res) => { //get all books from user
+  console.log("GET request get all books");
   User.find({})
   .then(saved_books => {
       res.status(200).json(saved_books)
@@ -55,7 +55,7 @@ app.get('/users', (req, res) => {
   })
 })
 
-app.post('/users', async (req, res) => {
+app.post('/users', async (req, res) => {//add a user to database
   console.log("POST request add user")
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -89,21 +89,18 @@ app.post('/users', async (req, res) => {
   }
 })
 
-app.post('/home', async (req, res)=> {
+app.post('/home', async (req, res)=> {  
   User.findOne({email: { $eq: req.body.email }})
   .then(user => {
     if (user==null){
-      console.log(user);
       return res.status(400).json({
         msg: "No such user exists"
         });
     }
     
     try {
-    console.log(req.body.password+"----"+user.toObject().password)
     bcrypt.compare(req.body.password, user.toObject().password)
     .then(result=>{
-      console.log(result);
       if(result){
         res.render("ejs/home.ejs",{name:user.toObject().name, email:user.toObject().email});
       }else{
@@ -121,15 +118,13 @@ app.post('/home', async (req, res)=> {
 })
 })
 
-app.post('/home/saveBook/:email',(req,res)=>{
+app.post('/home/saveBook/:email',(req,res)=>{ //save a user's book to database
   console.log("Post request add book")
   const newBook = {
     title_auth: req.body.title_auth,
     id: req.body.id,
     comments : ""
   };
-  console.log(newBook);
-  console.log(req.params.email);
 
   User.updateOne({email: { $eq: req.params.email }}, { "$push": { "books": newBook } })
     .then(user => {
@@ -150,7 +145,7 @@ app.post('/home/saveBook/:email',(req,res)=>{
     })
 });
 
-app.delete('/home/deleteBook/:email',(req,res)=>{
+app.delete('/home/deleteBook/:email',(req,res)=>{//delete a user's book from database
   console.log("Delete request delete book")
   User.updateOne({email: { $eq: req.params.email }}, { "$pull": { "books": {id:req.body.id}}} )
     .then(user => {
@@ -171,7 +166,7 @@ app.delete('/home/deleteBook/:email',(req,res)=>{
     })
 });
 
-app.get('/home/booksList/saved_books/:email',(req,res)=>{
+app.get('/home/booksList/saved_books/:email',(req,res)=>{   //get all user's books
   User.findOne({email: { $eq: req.params.email }})
   .then(user =>{
       if(user ==""){
@@ -182,7 +177,7 @@ app.get('/home/booksList/saved_books/:email',(req,res)=>{
   });
 })
 
-app.put('/home/booksList/bookProcess/proccess/:email',(req,res)=>{
+app.put('/home/booksList/bookProcess/proccess/:email',(req,res)=>{ //proccess a user's book
 
   let title;
   let comment;
@@ -221,7 +216,7 @@ app.put('/home/booksList/bookProcess/proccess/:email',(req,res)=>{
   })
 })
 
-function sendEmail(email,name){
+function sendEmail(email,name){       // sends an email to user after registration
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

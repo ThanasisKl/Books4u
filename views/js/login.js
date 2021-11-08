@@ -1,4 +1,4 @@
-window.onload = function(){
+window.onload = function(){        //loading spinner
 
     document.getElementById("login_button").addEventListener("click", function(){
         document.getElementById("login_button").innerHTML = ` <i class="fa fa-spinner fa-spin"></i>`;
