@@ -89,7 +89,7 @@ app.post('/users', async (req, res) => {//add a user to database
   }
 })
 
-app.post('/home', async (req, res)=> {  
+app.post('/home', async (req, res)=> {  //login check
   User.findOne({email: { $eq: req.body.email }})
   .then(user => {
     if (user==null){

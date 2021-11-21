@@ -1,7 +1,8 @@
-window.onload = function(){
+giwindow.onload = function(){
     let book = localStorage.getItem("book"); // get author and title from local storage
     let id = localStorage.getItem("id");  //get book id from local storage
-    // localStorage.clear();        //clear local storage
+    localStorage.removeItem("id");
+    localStorage.removeItem("book");
 
     let h2 = document.getElementById("book_id");
     h2.innerHTML = `<span>Processing:</span> ${book}`;
