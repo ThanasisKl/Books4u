@@ -1,5 +1,6 @@
-window.onload = function(){
+window.addEventListener("load", HTMLloaded);
 
+function HTMLloaded(){
     if(document.getElementById("email").innerHTML !==""){
         localStorage.setItem('Email', document.getElementById("email").innerHTML);
         document.getElementById("email").innerHTML;
@@ -91,6 +92,8 @@ window.onload = function(){
 async function getFetch(url){
     const response = await fetch(url, {
         method: 'GET',
+        mode: "cors",
+        // credentials: "include",
         headers: {
             'Accept': 'application/json'
         }
@@ -130,6 +133,7 @@ async function saveBook(bookid,titleAuth){
 let responseJSON = {
     method: 'POST',
     mode: 'cors', 
+    // credentials: "include",
     headers: {
       'Content-Type': 'application/json'
     },
@@ -172,6 +176,7 @@ async function deleteBook(bookid){  //delete a book from saves
     let responseJSON = {
         method: 'DELETE',
         mode: 'cors', 
+        // credentials: "include",
         headers: {
           'Content-Type': 'application/json'
         },
