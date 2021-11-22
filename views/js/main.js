@@ -29,6 +29,7 @@ function HTMLloaded(){
                     createListeners2Buttons();            //creates event listeners to every save buttons
                 }catch(err){                               //No results for the search   
                     document.getElementById("search_results").innerHTML = "<h2>No Results</h2>"
+                    document.getElementById("button").innerHTML = `Search`
                 }
             })
             .catch(err => {           //bad http code status
